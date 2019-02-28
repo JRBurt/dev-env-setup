@@ -10,17 +10,10 @@ sudo apt-get install python3-venv
 # Configure git
 ./git.sh
 
-# Install ngrok
-./ngrok.sh
-
-# Install Heroku Toolbelt
-wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-heroku --version
-
 # Install postgres database
 ./postgres.sh
 psql --version
 
 # Overwrite bash config
-cp -f .bashrc ~/.bashrc
-source ~/.bashrc
+cp -f .bash_profile ~/.bash_profile
+source ~/.bash_profile
