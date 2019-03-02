@@ -1,6 +1,5 @@
-#################################
-#### FINDER
-#################################
+
+# ----- FINDER --------------------------------------------------------- #
 
 # Show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -15,9 +14,8 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 defaults write com.apple.finder NewWindowTarget -string "PfHm"
 
 
-########################################
-#### DOCK
-########################################
+
+# ----- DOCK ----------------------------------------------------------- #
 
 # Set Dock size
 defaults write com.apple.dock tilesize -int 35
@@ -35,9 +33,8 @@ defaults write com.apple.dock minimize-to-application -int 0
 defaults write com.apple.dock show-process-indicators -int 1
 
 
-#################################
-#### KEYBOARD
-#################################
+
+# ----- KEYBOARD ------------------------------------------------------- #
 
 # Disable automatic period substitution
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
@@ -49,9 +46,8 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
 
-#################################
-#### OTHER
-#################################
+
+# ----- OTHER ---------------------------------------------------------- #
 
 # Disable transparency
 defaults read com.apple.universalaccess reduceTransparency -bool true

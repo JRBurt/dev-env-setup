@@ -5,6 +5,8 @@ brew 'mas'
 cask 'firefox'
 cask 'spotify'
 cask 'visual-studio-code'
+cask 'vienna'
+cask 'docker'
 
 mas "iMovie", id: 408981434
 mas "Numbers", id: 409203825
