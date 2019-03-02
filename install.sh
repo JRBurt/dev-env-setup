@@ -117,6 +117,22 @@ fi
 
 
 
+# ----- PSQL ----------------------------------------------------------- #
+if $IS_HOMEBREW_INSTALLED; then
+  read -p "${ARROW_YELLOW} Install latest Ruby version via Homebrew? [y/n]: "
+  
+  if [ "$REPLY" == "y" ]; then
+    echo "${ARROW} Installing Ruby..."
+    brew install postgres
+    # - Configure to start up automatically - #
+    mkdir -p ~/Library/LaunchAgents
+    ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+  fi
+fi
+# ---------------------------------------------------------------------- #
+
+
 # ----- .GITCONFIG ----------------------------------------------------- #
 read -p "${ARROW_YELLOW} Configure Git by creating ~/.gitconfig file? [y/n]: "
 
@@ -146,6 +162,17 @@ fi
 
 
 
+# ----- .PSQLRC -------------------------------------------------------- #
+read -p "${ARROW_YELLOW} Configure psql by creating ~/.psqlrc file? [y/n]: "
+
+if [ "$REPLY" == "y" ]; then
+  echo "${ARROW} Creating ~/.psqlrc file..."
+  cp .psqlrc ~
+fi
+# ---------------------------------------------------------------------- #
+
+
+
 # ----- APPLICATION BUNDLE --------------------------------------------- #
 if $IS_HOMEBREW_INSTALLED; then
   read -p "${ARROW_YELLOW} Install applications via Homebrew Cask? [y/n]: "
@@ -165,17 +192,6 @@ if $IS_HOMEBREW_INSTALLED; then
       done
     fi
   fi
-fi
-# ---------------------------------------------------------------------- #
-
-
-
-# ----- TERMINAL PROFILE ----------------------------------------------- #
-read -p "${ARROW_YELLOW} Download Flat Terminal profile? [y/n]: "
-
-if [ "$REPLY" == "y" ]; then
-  echo "${ARROW_YELLOW} New Terminal window opened. Click 'Shell' > 'Use settings as default' to use it as default profile."
-  open ./Flat.terminal
 fi
 # ---------------------------------------------------------------------- #
 

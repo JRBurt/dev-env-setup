@@ -1,29 +1,32 @@
-# Auto Configure Development Environment in Ubuntu
-This script is used to setup developer tools on a fresh install of Ubuntu.
+# Auto Configure Development Environment in macOS
+This script is used to setup developer tools on a fresh install of macOS.
 
-## Install git on your system:
-
-```
-$ sudo apt-get install git
-```
 
 ## Clone this repo:
 
 ```
-$ git clone https://github.com/dchess/dev-env-setup.git
+$ git clone https://github.com/JRBurt/dev-env-setup.git
 ```
 
 ## Run the master script:
 
 ```
-$ ./master.sh
+$ ./install.sh
 ```
 
-This will install the following (in order):
+This will: (in order)
 
-- VIM (with NERDTree, NERDCommenter, CtrlP, and Vim ColorSchemes)
-- overwrite  vimrc and set terminal colorscheme
-- add git config and aliases
-- heroku toolbelt
-- postgres
+- install /update Homebrew
+- install git
+- install Ruby
+- install PostgreSQL
+- overwrite .gitconfig
+- overwrite .bash_profile
+- install macOS application bundle
 - overwrite bashrc
+- install VS Code extensions
+- set VS Code settings
+- set up VS Code snippets
+- set firmware password
+- set computer name
+- set preferred macOS defaults
