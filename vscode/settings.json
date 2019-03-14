@@ -1,0 +1,29 @@
+{
+    "python.pythonPath": "/usr/local/bin/python3",
+    "workbench.startupEditor": "newUntitledFile",
+    "window.restoreWindows": "folders",
+    "git.autofetch": true,
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "string.quoted.docstring.multi.python",
+                "settings": {
+                    "foreground": "#ff3874"
+                }
+            },
+            {
+                "scope": "string.quoted.docstring.multi.python punctuation.definition.string.end.python",
+                "settings": {
+                    "foreground": "#ff3874"
+                }
+            },
+            {
+                "scope": "string.quoted.docstring.multi.python punctuation.definition.string.begin.python",
+                "settings": {
+                    "foreground": "#ff3874"
+                }
+            }
+        ]
+    },
+    "workbench.settings.editor": "json"
+}
