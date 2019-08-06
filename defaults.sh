@@ -1,6 +1,8 @@
 # Nice to Adds
 # Keyboard Shortcuts:
 #   F6 selects Chrome/Mozilla Search bar
+#   	com.apple.preference.keyboard
+#			keyboardTab
 
 # ----- FINDER --------------------------------------------------------- #
 

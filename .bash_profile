@@ -1,4 +1,3 @@
-
 # ----- ALIASES -------------------------------------------------------- #
 alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
 alias ll="ls -lhA"
@@ -8,14 +7,15 @@ alias mkdir="mkdir -p"
 alias top="htop"
 alias ..="cd .."
 alias ....="cd ../.."
+alias proj="cd ~/projects"
 # ---------------------------------------------------------------------- #
 
 
 # ----- virtualenv and virtualenvwrapper ------------------------------- #
 # export WORKON_HOME=$HOME/.virtualenvs
-# 
+#
 # export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-# 
+#
 # source /usr/local/bin/virtualenvwrapper.sh
 # ---------------------------------------------------------------------- #
 
@@ -75,4 +75,6 @@ PS1+="${DARK_GRAY}\$ " # Dollar sign
 PS1+="${DEFAULT}" # Get back default color
 
 export PS1;
-# ---------------------------------------------------------------------- #
+
+# ----- PATH ----------------------------------------------------------- #
+
