@@ -16,14 +16,14 @@ $ ./install.sh
 
 This will: (in order)
 
-- install /update Homebrew
+- install and update Homebrew
 - install git
 - install Ruby
 - install PostgreSQL
-- overwrite .gitconfig
-- overwrite .bash_profile
+- overwrite `.gitconfig`
+- overwrite `.bash_profile`
 - install macOS application bundle
-- overwrite bashrc
+- overwrite `.bashrc`
 - install VS Code extensions
 - set VS Code settings
 - set up VS Code snippets
