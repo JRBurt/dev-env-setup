@@ -26,6 +26,13 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
+# Make / Change directory
+mkcdir ()
+{
+    mkdir -p -- "$1" &&
+      cd -P -- "$1"
+}
+
 # Determine active Python virtualenv details.
 # set_virtualenv () {
 #   if test -z "$VIRTUAL_ENV" ; then
@@ -41,6 +48,7 @@ parse_git_branch() {
 # ----- FORMATTING ----------------------------------------------------- #
 export CLICOLOR=1 # Enable ANSI colors sequences to distinguish file types
 export LSCOLORS=GxFxCxDxBxegedabagaced # Value of this variable describes what color to use for which file type
+export GREP_OPTIONS='--color=auto'
 
 # Color definitions (used in prompt)
 RED="\[\033[1;31m\]"
@@ -75,6 +83,4 @@ PS1+="${DARK_GRAY}\$ " # Dollar sign
 PS1+="${DEFAULT}" # Get back default color
 
 export PS1;
-
-# ----- PATH ----------------------------------------------------------- #
-
+# ---------------------------------------------------------------------- #
