@@ -1,7 +1,10 @@
 #!/bin/bash
 
 
-# ----- BEAUTIFICATION ------------------------------------------------- #
+###################################################################################################
+#                                         BEAUTIFICATION                                          #
+###################################################################################################
+
 # Colors
 BOLD=$(tput bold)
 CYAN=$(tput setaf 6)
@@ -17,11 +20,13 @@ DIVIDER="${CYAN}${BOLD}------------------------------------------------$DEFAULT"
 ARROW="$CYAN$BOLD==>$DEFAULT"
 ARROW_GREEN="$GREEN$BOLD==>$DEFAULT"
 ARROW_YELLOW="$YELLOW$BOLD==>$DEFAULT"
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- APPLICATIONS AND PACKAGING ------------------------------------- #
+###################################################################################################
+#                                   APPLICATIONS AND PACKAGING                                    #
+###################################################################################################
+
 # Array of available applications that can be installed via Homebrew Cask
 AVAILABLE_CASK_APPLICATIONS=(firefox spotify visual-studio-code vienna docker)
 # Array of available VS Code extensions
@@ -31,42 +36,48 @@ AVAILABLE_VSCODE_EXTENSIONS=()
 SELECTED_CASK_APPLICATIONS=()
 SELECTED_NPM_PACKAGES=()
 SELECTED_VSCODE_EXTENTIONS=()
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- VARIABLE INITIALIZATION ---------------------------------------- #
+###################################################################################################
+#                                     VARIABLE INITIALIZATION                                     #
+###################################################################################################
+
 # Booleans to track if specific programs are already installed
 IS_HOMEBREW_INSTALLED=false
 IS_MAS_INSTALLED=false
 IS_NVM_INSTALLED=false
 IS_NODE_INSTALLED=false
 IS_VSCODE_INSTALLED=false
-# ---------------------------------------------------------------------- #
-
-
-
 clear
 
-# ----- INSTALLER OPENING ---------------------------------------------- #
+
+
+###################################################################################################
+#                                        INSTALLER OPENING                                        #
+###################################################################################################
+
 echo "Welcome to the installer!"
 echo -e "First, introduce your password to execute all the commands as super user.$NEW_LINE"
 
 echo -e "${RED}${BOLD}Important:$DEFAULT You can be asked more times for password during the process."
 echo -e "Also, make sure that you are logged in to the Mac App Store.$NEW_LINE"
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- USER CREDENTIALS ----------------------------------------------- #
+###################################################################################################
+#                                         USER CREDENTIALS                                        #
+###################################################################################################
+
 sudo -v
-# ---------------------------------------------------------------------- #
-
 clear
 
 
 
-# ----- HOMEBREW ------------------------------------------------------- #
+###################################################################################################
+#                                             HOMEBREW                                            #
+###################################################################################################
+
 if hash brew 2>/dev/null; then
   IS_HOMEBREW_INSTALLED=true
 fi
@@ -87,11 +98,13 @@ else
     IS_HOMEBREW_INSTALLED=true
   fi
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- GIT ------------------------------------------------------------ #
+###################################################################################################
+#                                               GIT                                               #
+###################################################################################################
+
 if $IS_HOMEBREW_INSTALLED; then
   read -p "${ARROW_YELLOW} Install latest Git version via Homebrew? [y/n]: "
   
@@ -100,11 +113,13 @@ if $IS_HOMEBREW_INSTALLED; then
     brew install git
   fi
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- RUBY ----------------------------------------------------------- #
+###################################################################################################
+#                                              RUBY                                               #
+###################################################################################################
+
 if $IS_HOMEBREW_INSTALLED; then
   read -p "${ARROW_YELLOW} Install latest Ruby version via Homebrew? [y/n]: "
   
@@ -113,16 +128,19 @@ if $IS_HOMEBREW_INSTALLED; then
     brew install ruby
   fi
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- PSQL ----------------------------------------------------------- #
+
+###################################################################################################
+#                                              PSQL                                               #
+###################################################################################################
+
 if $IS_HOMEBREW_INSTALLED; then
-  read -p "${ARROW_YELLOW} Install latest Ruby version via Homebrew? [y/n]: "
+  read -p "${ARROW_YELLOW} Install latest Postgresql version via Homebrew? [y/n]: "
   
   if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Installing Ruby..."
+    echo "${ARROW} Installing Postgresql..."
     brew install postgres
     # - Configure to start up automatically - #
     mkdir -p ~/Library/LaunchAgents
@@ -130,10 +148,13 @@ if $IS_HOMEBREW_INSTALLED; then
     launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
   fi
 fi
-# ---------------------------------------------------------------------- #
 
 
-# ----- .GITCONFIG ----------------------------------------------------- #
+
+###################################################################################################
+#                                           .GITCONFIG                                            #
+###################################################################################################
+
 read -p "${ARROW_YELLOW} Configure Git by creating ~/.gitconfig file? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
@@ -147,33 +168,39 @@ if [ "$REPLY" == "y" ]; then
   sed -i -e "s/email@email.com/$email/g" ~/.gitconfig
   sed -i -e "s/= editor/= $editor/g" ~/.gitconfig
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- .BASH_PROFILE --------------------------------------------------- #
+###################################################################################################
+#                                         .BASH_PROFILE                                           #
+###################################################################################################
+
 read -p "${ARROW_YELLOW} Configure bash by creating ~/.bash_profile file? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
   echo "${ARROW} Creating ~/.bash_profile file..."
   cp .bash_profile ~
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- .PSQLRC -------------------------------------------------------- #
+###################################################################################################
+#                                            .PSQLRC                                              #
+###################################################################################################
+
 read -p "${ARROW_YELLOW} Configure psql by creating ~/.psqlrc file? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
   echo "${ARROW} Creating ~/.psqlrc file..."
   cp .psqlrc ~
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- APPLICATION BUNDLE --------------------------------------------- #
+###################################################################################################
+#                                       APPLICATION BUNDLE                                        #
+###################################################################################################
+
 if $IS_HOMEBREW_INSTALLED; then
   read -p "${ARROW_YELLOW} Install applications via Homebrew Cask? [y/n]: "
   
@@ -193,65 +220,13 @@ if $IS_HOMEBREW_INSTALLED; then
     fi
   fi
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- VS CODE EXTENSIONS --------------------------------------------- #
-if hash code 2>/dev/null; then
-  IS_VSCODE_INSTALLED=true
-fi
+###################################################################################################
+#                                        FIRMWARE PASSWORD                                        #
+###################################################################################################
 
-if $IS_VSCODE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Install Visual Studio Code extensions? [y/n]: "
-  
-  if [ "$REPLY" == "y" ]; then
-    for item in "${AVAILABLE_VSCODE_EXTENSIONS[@]}"; do
-      read -ep "${ARROW_YELLOW} Install \"$item\"? [y/n]: "
-      if [ "$REPLY" == "y" ]; then
-        SELECTED_VSCODE_EXTENSIONS+=("$item")
-      fi
-    done
-    
-    if [ ${#SELECTED_VSCODE_EXTENSIONS[@]} -gt 0 ]; then
-      echo "${ARROW} Installing Visual Studio Code extensions..."
-      for application in "${SELECTED_NPM_PACKAGES[@]}"; do
-        code --install-extension ${application}
-      done
-    fi
-  fi
-fi
-# ---------------------------------------------------------------------- #
-
-
-
-# ----- VS CODE SETTINGS -----------------------------------------------#
-if $IS_VSCODE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Configure Visual Studio Code settings? [y/n]: "
-  
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Visual Studio Code settings..."
-    cp settings.json /Users/${USER}/Library/Application\ Support/Code/User
-  fi
-fi
-# ---------------------------------------------------------------------- #
-
-
-
-# ----- VS CODE SNIPPETS ----------------------------------------------- #
-if $IS_VSCODE_INSTALLED; then
-  read -p "${ARROW_YELLOW} Configure Visual Studio Code snippets? [y/n]: "
-  
-  if [ "$REPLY" == "y" ]; then
-    echo "${ARROW} Configuring Visual Studio Code snippets..."
-    cp snippets.code-snippets /Users/${USER}/Library/Application\ Support/Code/User/snippets
-  fi
-fi
-# ---------------------------------------------------------------------- #
-
-
-
-# ----- FIRMWARE PASSWORD ---------------------------------------------- #
 if [[ $(sudo firmwarepasswd -check) =~ "Password Enabled: Yes" ]]; then
   echo "${ARROW_GREEN} Firmware password is already set up!"
 else
@@ -261,11 +236,13 @@ else
     sudo firmwarepasswd -setpasswd -setmode command
   fi
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- COMPUTER NAME -------------------------------------------------- #
+###################################################################################################
+#                                          COMPUTER NAME                                          #
+###################################################################################################
+
 read -p "${ARROW_YELLOW} Set computer name? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
@@ -275,18 +252,25 @@ if [ "$REPLY" == "y" ]; then
   sudo scutil --set HostName $uservar
   sudo scutil --set LocalHostName $uservar
 fi
-# ---------------------------------------------------------------------- #
 
 
 
-# ----- MAC_OS DEFAULTS ------------------------------------------------ #
+###################################################################################################
+#                                         MAC_OS DEFAULTS                                         #
+###################################################################################################
+
 read -p "${ARROW_YELLOW} Configure macOS Defaults? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
   echo "${ARROW} Configuring macOS Defaults..."
   . ./api/defaults.sh
 fi
-# ---------------------------------------------------------------------- #
+
+
+
+###################################################################################################
+#                                               FIN                                               #
+###################################################################################################
 
 echo -e "${NEW_LINE}${YELLOW}${BOLD}Note:$DEFAULT Some changes may need system restart to be applied!"
 echo -e "${NEW_LINE}${GREEN}${BOLD}Congratulations, installation complete!${DEFUALT}${NEW_LINE}"

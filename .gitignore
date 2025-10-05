@@ -21,3 +21,5 @@ Thumbs.db
 .mrjob.conf
 .s3cfg
 .aws/
+
+scratch
