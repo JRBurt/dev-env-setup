@@ -2,11 +2,11 @@ brew 'git'
 brew 'ruby' 
 brew 'mas'
 
-cask 'firefox'
-cask 'spotify'
-cask 'visual-studio-code'
-cask 'vienna'
 cask 'docker'
+cask 'firefox'
+cask 'jq'
+cask 'spotify'
+cask 'sublime-text'
 
 mas "iMovie", id: 408981434
 mas "Numbers", id: 409203825
