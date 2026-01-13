@@ -179,7 +179,7 @@ read -p "${ARROW_YELLOW} Configure bash by creating ~/.bash_profile file? [y/n]:
 
 if [ "$REPLY" == "y" ]; then
   echo "${ARROW} Creating ~/.bash_profile file..."
-  cp .bash_profile ~
+  cp config/.bash_profile ~
 fi
 
 
@@ -192,7 +192,7 @@ read -p "${ARROW_YELLOW} Configure psql by creating ~/.psqlrc file? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
   echo "${ARROW} Creating ~/.psqlrc file..."
-  cp .psqlrc ~
+  cp config/.psqlrc ~
 fi
 
 
@@ -263,7 +263,7 @@ read -p "${ARROW_YELLOW} Configure macOS Defaults? [y/n]: "
 
 if [ "$REPLY" == "y" ]; then
   echo "${ARROW} Configuring macOS Defaults..."
-  . ./api/defaults.sh
+  . ./scripts/defaults.sh
 fi
 
 
