@@ -23,3 +23,6 @@ Thumbs.db
 .aws/
 
 scratch
+
+# SSH config (use config/.ssh/config.example as template)
+config/.ssh/config
