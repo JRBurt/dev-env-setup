@@ -2,7 +2,8 @@
 # Modular installation and configuration for macOS
 
 .PHONY: help install all homebrew brew-packages dotfiles dotfiles-bash dotfiles-git dotfiles-psql \
-	macos-defaults macos-privacy backup check git-config postgres-setup
+	macos-defaults macos-privacy backup check git-config postgres-setup \
+	server-setup push-server
 
 # Colors
 CYAN := \033[36m
@@ -172,6 +173,11 @@ check: ## Check what's already installed
 	else \
 		echo "  $(RED)✗$(RESET) PostgreSQL"; \
 	fi
+	@if command -v tmux >/dev/null 2>&1; then \
+		echo "  $(GREEN)✓$(RESET) tmux - $$(tmux -V)"; \
+	else \
+		echo "  $(RED)✗$(RESET) tmux"; \
+	fi
 	@echo ""
 	@echo "$(BOLD)Configuration Files:$(RESET)"
 	@if [ -f $(HOME)/.bash_profile ]; then \
@@ -190,6 +196,26 @@ check: ## Check what's already installed
 		echo "  $(RED)✗$(RESET) .psqlrc"; \
 	fi
 	@echo ""
+
+##@ Headless Server Setup
+
+server-setup: ## Run server-setup.sh on THIS machine (useful for local Pi / server)
+	@echo "$(BOLD)$(CYAN)==> Running server setup locally...$(RESET)"
+	@chmod +x $(SCRIPTS_DIR)/server-setup.sh
+	@$(SCRIPTS_DIR)/server-setup.sh --tmux-conf $(CONFIG_DIR)/.tmux.conf
+
+push-server: ## Push key + config to a remote server. Usage: make push-server HOST=pi.local [USER=pi] [PORT=22] [ALIAS=mypi]
+	@if [ -z "$(HOST)" ]; then \
+		echo "$(RED)Error: HOST is required. Usage: make push-server HOST=<host> [USER=pi] [PORT=22] [ALIAS=name]$(RESET)"; \
+		exit 1; \
+	fi
+	@chmod +x $(SCRIPTS_DIR)/push-server.sh
+	@$(SCRIPTS_DIR)/push-server.sh \
+		$(HOST) \
+		$(if $(USER),$(USER),) \
+		$(if $(PORT),$(PORT),) \
+		$(if $(ALIAS),--alias $(ALIAS),) \
+		--add-ssh-config
 
 clean: ## Remove backup files
 	@echo "$(BOLD)$(YELLOW)==> Removing backup files...$(RESET)"

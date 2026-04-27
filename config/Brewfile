@@ -7,6 +7,7 @@ cask 'firefox'
 cask 'jq'
 cask 'spotify'
 cask 'sublime-text'
+cask 'tree'
 
 mas "iMovie", id: 408981434
 mas "Numbers", id: 409203825
